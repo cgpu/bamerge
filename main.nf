@@ -1,6 +1,3 @@
-// Params to be migrated to nextflow.config file soon
-params.annotation_filepath     = false
-
 // Input channel, fromPath it retrieves all objects of type 'file'
 input_input_files_channel_ = Channel.fromPath(params.annotation_filepath)
                                     .ifEmpty { exit 1, "Annotation file not found: ${params.annotation_filepath}" }
