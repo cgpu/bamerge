@@ -1,22 +1,23 @@
 // Input channel, fromPath it retrieves all objects of type 'file'
-input_input_files_channel_ = Channel.fromPath(params.annotation_filepath)
+input_files_channel_ = Channel.fromPath(params.annotation_filepath)
                                     .ifEmpty { exit 1, "Annotation file not found: ${params.annotation_filepath}" }
                                     .splitCsv(sep: ',', skip: 1)
                                     .map{ labNo, filename -> [labNo,  file(filename)] }
                                     .groupTuple()
 
-// ToDo: Redirect stdout of all files in one sha256sum.txt output file using bash >> append operator
-process merge_bams {
+process samtools_merge_bams {
 
     tag "$labNo"
     publishDir "results", mode: 'copy'
     container 'lifebitai/samtools:latest'
 
     input:
-    set val(labNo), file('*.bam') from input_input_files_channel_
+    set val(labNo), file('*.bam') from input_files_channel_
 
     output:
     file "${labNo}.merged.bam" into nowhere_channel
+
+    when: params.tool.toLowerCase().contains("samtools")
 
     script:
     """
@@ -24,3 +25,22 @@ process merge_bams {
     """
 }
 
+process sambamba_merge_bams {
+
+    tag "$labNo"
+    publishDir "results", mode: 'copy'
+    container 'lifebitai/samtools:latest'
+
+    input:
+    set val(labNo), file('*.bam') from input_files_channel_
+
+    output:
+    file "${labNo}.merged.bam" into nowhere_channel
+
+    when: params.tool.toLowerCase().contains("sambamba")
+
+    script:
+    """
+    sambamba-merge "${labNo}.merged.bam" *.bam 
+    """
+}
