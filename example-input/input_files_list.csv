@@ -1,3 +1,3 @@
-unique_sample_id,filepath
-NA12878.chrom1,s3://giab/data/NA12878/CompleteGenomics_normal/BAM/NA12878.chrom1.CGI.teramap.CEU.high_coverage.20120417.bam
-NA12878.chrom2,s3://giab/data/NA12878/CompleteGenomics_normal/BAM/NA12878.chrom2.CGI.teramap.CEU.high_coverage.20120417.bam
+shared_sample_id,filepath
+NA12878,s3://giab/data/NA12878/CompleteGenomics_normal/BAM/NA12878.chrom1.CGI.teramap.CEU.high_coverage.20120417.bam
+NA12878,s3://giab/data/NA12878/CompleteGenomics_normal/BAM/NA12878.chrom2.CGI.teramap.CEU.high_coverage.20120417.bam
