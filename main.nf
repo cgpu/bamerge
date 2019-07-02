@@ -4,6 +4,7 @@ input_files_channel_ = Channel.fromPath(params.input_files_list)
                               .splitCsv(sep: ',', skip: 1)
                               .map{ shared_sample_id, filepath -> [shared_sample_id,  file(filepath)] }
                               .groupTuple()
+                              .into { input_files_channel_samtools_; input_files_channel_sambamba_}
 
 
 process samtools_merge_bams {
@@ -13,7 +14,7 @@ process samtools_merge_bams {
     container 'lifebitai/samtools:latest'
 
     input:
-    set val(shared_sample_id), file('*.bam') from input_files_channel_
+    set val(shared_sample_id), file('*.bam') from input_files_channel_samtools_
 
     output:
     file "${shared_sample_id}.merged.bam" into nowhere_channel
@@ -33,7 +34,7 @@ process sambamba_merge_bams {
     container 'btrspg/sambamba:0.6.9-v1.0.1dev-prd'
 
     input:
-    set val(shared_sample_id), file('*.bam') from input_files_channel_
+    set val(shared_sample_id), file('*.bam') from input_files_channel_sambamba_
 
     output:
     file "${shared_sample_id}.merged.bam" into nowhere_channel
