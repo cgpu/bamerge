@@ -1,3 +1,21 @@
+// set threadmem equal to total memory divided by number of threads
+int threads    = Runtime.getRuntime().availableProcessors()
+threadmem      = (((Runtime.getRuntime().maxMemory() * 4) / threads) as nextflow.util.MemoryUnit)
+
+// More memory for samtools processes
+threadmem_more = 4 * threadmem
+
+// Added soft-coded method but hard-coded value of cpu-sage percentage for compute intensive process
+// ToDo: Expose the hard-coded value as parameter if needed in the future for user to allocate resources at will
+
+// Declaring percentage of total cpus (aka 'threads' var) to be allocated to compute intensive process
+cpu_percentage = 1
+
+// Multiplying & converting java.math.BigDecimal object to java.lang.Integer
+// Check object type with 'my_object.getClass()' method
+// More info here: https://www.geeksforgeeks.org/bigdecimal-intvalue-method-in-java/
+cpus_to_use_samtools    = (cpu_percentage * threads).intValue()
+
 // Input channel, fromPath it retrieves all objects of type 'file'
 input_files_channel_ = Channel.fromPath(params.input_files_list)
                               .ifEmpty { exit 1, "Input BAM files .csv list file not found: ${params.input_files_list}" }
@@ -12,6 +30,9 @@ process samtools_merge_bams {
     tag "$shared_sample_id"
     publishDir "results", mode: 'copy'    
     container 'lifebitai/samtools:latest'
+
+    // Allocate cpus to be utilised in this process
+    cpus cpus_to_use_samtools
 
     input:
     set val(shared_sample_id), file('*.bam') from input_files_channel_samtools_
