@@ -23,7 +23,7 @@ process samtools_merge_bams {
 
     script:
     """
-    samtools merge "${shared_sample_id}.merged.bam" *sorted.bam 
+    samtools merge "${shared_sample_id}.merged.bam" *.bam 
     """
 }
 
