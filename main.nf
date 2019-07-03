@@ -1,6 +1,6 @@
 // Input channel, fromPath it retrieves all objects of type 'file'
 input_files_channel_ = Channel.fromPath(params.input_files_list)
-                              .ifEmpty { exit 1, "Annotation file not found: ${params.input_files_list}" }
+                              .ifEmpty { exit 1, "Input BAM files .csv list file not found: ${params.input_files_list}" }
                               .splitCsv(sep: ',', skip: 1)
                               .map{ shared_sample_id, filepath -> [shared_sample_id,  file(filepath)] }
                               .groupTuple()
