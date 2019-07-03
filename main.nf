@@ -17,7 +17,7 @@ process samtools_merge_bams {
     set val(shared_sample_id), file('*.bam') from input_files_channel_samtools_
 
     output:
-    file "${shared_sample_id}.merged.bam" into nowhere_channel
+    file "${shared_sample_id}.merged.bam" into nowhere_channel_samtools
 
     when: params.tool.toLowerCase().contains("samtools")
 
@@ -37,7 +37,7 @@ process sambamba_merge_bams {
     set val(shared_sample_id), file('*.bam') from input_files_channel_sambamba_
 
     output:
-    file "${shared_sample_id}.merged.bam" into nowhere_channel
+    file "${shared_sample_id}.merged.bam" into nowhere_channel_sambamba
 
     when: params.tool.toLowerCase().contains("sambamba")
 
