@@ -1,5 +1,16 @@
-# merge-bams-nf
-Minimal nextflow pipeline to merge technical replicates from BAM files
+<p align="center">
+  <img src="images/merge-bam-files.svg"  width="300" align="left" >
+</p>
+
+<br/><br/>
+# merge-bams-nf 
+# Minimal nextflow pipeline to merge technical replicates from BAM files
+<br/><br/><br/><br/>
+
+
+```diff
+---------  **Under construction!**    ---------
+```
 
 ## Quick Start
 
