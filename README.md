@@ -1,10 +1,10 @@
 <p align="center">
-  <img src="images/merge-bam-files.svg"  width="300" align="left" >
+  <img src="images/merge-bam-files.svg"  width="800" align="center" >
 </p>
 
 <br/><br/>
-# merge-bams-nf 
-# Minimal nextflow pipeline to merge technical replicates from BAM files
+## merge-bams-nf 
+Minimal nextflow pipeline to merge technical replicates from BAM files
 <br/><br/><br/><br/>
 
 
