@@ -23,26 +23,6 @@ process samtools_merge_bams {
 
     script:
     """
-    samtools merge "${shared_sample_id}.merged.bam" *.bam 
-    """
-}
-
-process sambamba_merge_bams {
-
-    tag "$shared_sample_id"
-    publishDir "results", mode: 'copy'
-    container 'btrspg/sambamba:0.6.9-v1.0.1dev-prd'
-
-    input:
-    set val(shared_sample_id), file('*.bam') from input_files_channel_sambamba_
-
-    output:
-    file "${shared_sample_id}.merged.bam" into nowhere_channel_sambamba
-
-    when: params.tool.toLowerCase().contains("sambamba")
-
-    script:
-    """
-    sambamba merge "${shared_sample_id}.merged.bam" *.bam 
+    samtools merge 	-@ 12 "${shared_sample_id}.merged.bam" *.bam 
     """
 }
