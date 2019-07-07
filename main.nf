@@ -23,6 +23,6 @@ process samtools_merge_bams {
 
     script:
     """
-    samtools merge 	-@ 12 "${shared_sample_id}.merged.bam" *.bam 
+    samtools merge 	-@ 4 "${shared_sample_id}.merged.bam" *.bam 
     """
 }
