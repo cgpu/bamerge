@@ -10,7 +10,7 @@ input_files_channel_ = Channel.fromPath(params.input_files_list)
 process samtools_merge_bams {
 
     tag "$shared_sample_id"
-    publishDir "results", mode: 'copy'    
+    publishDir "${params.outdir}/MergedBAMs", mode: 'copy',
     container 'lifebitai/samtools:latest'
 
     input:
