@@ -13,6 +13,12 @@ Minimal nextflow pipeline to merge technical replicates from BAM files
 
 ## Quick Start
 
+Required Arguments:
+
+| argument       | value | 
+|:--------------:|:-----:| 
+| <kbd>`input_files_list`</kbd>| a file like [this](example-input/input_files_list.csv) to denote file groups for merging | 
+|  <kbd>` --tool `</kbd>  | one of `samtools` or `sambamba` to select tool|
 To test the pipeline with the example input you can run:
 
 ```nextflow
