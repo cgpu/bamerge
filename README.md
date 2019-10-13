@@ -30,6 +30,6 @@ git clone https://github.com/cgpu/merge-bams-nf.git
 cd merge-bams-nf
 
 # Execute nextflow run command with example input parameters
-nextflow run cgpu/merge-bams-nf --input_files_list example-input/input_files_list.csv  --tool 'samtools' -with-docker lifebitai/samtools:latest
+nextflow run cgpu/merge-bams-nf --input_files_list example-input/input_files_list.csv  --tool 'samtools' 
 ```
 
